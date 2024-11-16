@@ -1,0 +1,180 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#include <WiFi.h>
+#include <FirebaseESP32.h>
+
+// Firebase credentials
+// #define FIREBASE_HOST "flood-alertation-default-rtdb.firebaseio.com"
+#define FIREBASE_HOST "https://flood-alertation-default-rtdb.firebaseio.com/"  // Replace with your Firebase project URL
+#define FIREBASE_AUTH "AIzaSyApYb8uDfLDh4oI1M5eLOZV_dCcG_-CKG0"  // Replace with your Firebase API key
+
+// Firebase authentication credentials
+#define EMAIL "dhaneshdassmct22cb@psnacet.edu.in"
+#define PASS "Dhanesh@2004"
+
+// Wi-Fi credentials
+const char* ssid = "_.dhxnexh_x18";      // Replace with your WiFi SSID
+const char* password = "Dhanesh@2004";  // Replace with your WiFi password
+
+// Firebase objects
+FirebaseData firebaseData;
+FirebaseAuth auth;
+FirebaseConfig config;
+
+#define RAIN_SENSOR_PIN 35  // Analog pin for rain sensor
+#define TRIG_PIN 5          // Define the TRIG pin for ultrasonic sensor
+#define ECHO_PIN 18         // Define the ECHO pin for ultrasonic sensor
+
+// Constants for rainfall speed calculation
+const float MAX_VOLTAGE = 3.3;  // Max voltage (3.3V for ESP32)
+const int MAX_ANALOG_VALUE = 4095;  // 12-bit ADC on ESP32 (0 to 4095)
+const float MAX_RAINFALL_INTENSITY = 50.0;  // Max rainfall rate in mm/hour (adjust as per your sensor)
+
+// Create an LCD object. Set the LCD address to 0x27 for a 16x2 LCD
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+float groundDistance = 0;  // Variable to store the ground distance when no water is present
+bool isWaterPresent = false;  // Flag to check if water is detected
+
+void setup() {
+  Serial.begin(115200);  // Initialize serial communication
+  pinMode(TRIG_PIN, OUTPUT);  // Set TRIG pin as output
+  pinMode(ECHO_PIN, INPUT);   // Set ECHO pin as input
+  
+  lcd.init();  // Initialize the LCD
+  lcd.backlight();  // Turn on the LCD backlight
+
+  // Debug message to indicate setup has begun
+  Serial.println("Setup initialized...");
+
+  // Measure the initial ground distance when no water is present
+  Serial.println("Measuring initial ground distance...");
+  groundDistance = measureDistance();
+  Serial.print("Ground Distance (No Water): ");
+  Serial.print(groundDistance);
+  Serial.println(" cm");
+
+  // Connect to Wi-Fi
+  connectToWiFi();
+
+  // Initialize Firebase
+  config.host = FIREBASE_HOST;
+  config.api_key = FIREBASE_AUTH;
+  auth.user.email = EMAIL;
+  auth.user.password = PASS;
+  Firebase.begin(&config, &auth);
+  Firebase.reconnectWiFi(true);
+
+  if (!Firebase.ready()) {
+    Serial.println("Failed to connect to Firebase");
+  } else {
+    Serial.println("Firebase connected");
+  }
+}
+
+void loop() {
+  // Read the analog value from the rain sensor
+  int sensorValue = analogRead(RAIN_SENSOR_PIN);
+  Serial.print("Rain Sensor Analog Value: ");
+  Serial.println(sensorValue);  // Debugging print
+
+  // Invert the sensor value for rainfall speed calculation
+  int invertedValue = MAX_ANALOG_VALUE - sensorValue;
+  float voltage = invertedValue * (MAX_VOLTAGE / MAX_ANALOG_VALUE);
+  float rainfallIntensity = mapRainfallIntensity(invertedValue);
+  
+  // Debugging prints
+  Serial.print("Rainfall Intensity: ");
+  Serial.println(rainfallIntensity);
+  
+  // Measure the current distance to the ground or water surface
+  float currentDistance = measureDistance();
+  Serial.print("Current Distance: ");
+  Serial.println(currentDistance);  // Debugging print
+
+  // If the current distance is less than the ground distance, water is present
+  float waterLevel = 0;
+  if (currentDistance < groundDistance - 1) {  // Apply a 1 cm threshold to avoid small variations
+    waterLevel = groundDistance - currentDistance;
+    isWaterPresent = true;
+    Serial.print("Water Level: ");
+    Serial.println(waterLevel);  // Debugging print
+  } else {
+    waterLevel = 0;
+    isWaterPresent = false;
+    Serial.println("No Water Detected");  // Debugging print
+  }
+
+  // Display values on the LCD
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Rain: ");
+  lcd.print(rainfallIntensity);
+  lcd.print(" mm/h");
+
+  lcd.setCursor(0, 1);
+  lcd.print("Water: ");
+  lcd.print(waterLevel);
+  lcd.print(" cm");
+
+  // Upload data to Firebase
+  uploadToFirebase(rainfallIntensity, waterLevel);
+
+  delay(1000);  // Delay for readability
+}
+
+// Function to measure distance using the ultrasonic sensor
+float measureDistance() {
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+
+  long duration = pulseIn(ECHO_PIN, HIGH);
+  float distance = (duration * 0.034) / 2;
+  return distance;
+}
+
+// Function to map inverted analog value to rainfall intensity
+float mapRainfallIntensity(int invertedValue) {
+  float intensity = (invertedValue / (float)MAX_ANALOG_VALUE) * MAX_RAINFALL_INTENSITY;
+  if (intensity < 1) intensity = 0;  // Ignore values below threshold
+  return intensity;
+}
+
+// Function to upload data to Firebase
+void uploadToFirebase(float rainfallIntensity, float waterLevel) {
+  if (Firebase.ready()) {
+    if (Firebase.setFloat(firebaseData, "/sensor_data/rainfall_intensity", rainfallIntensity)) {
+      Serial.println("Rainfall intensity data sent to Firebase");
+    } else {
+      Serial.print("Failed to send rainfall intensity data: ");
+      Serial.println(firebaseData.errorReason());
+    }
+
+    if (Firebase.setFloat(firebaseData, "/sensor_data/water_level", waterLevel)) {
+      Serial.println("Water level data sent to Firebase");
+    } else {
+      Serial.print("Failed to send water level data: ");
+      Serial.println(firebaseData.errorReason());
+    }
+  }
+}
+
+// Function to connect to Wi-Fi
+void connectToWiFi() {
+  Serial.print("Connecting to WiFi...");
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print(".");
+  }
+  Serial.println();
+  Serial.println("WiFi connected");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+
+
