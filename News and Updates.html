@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News and Updates</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        body, ul,html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+            
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0c6493;
+            padding: 10px 20px;
+        }
+
+        .logo{
+            display: flex;
+        }
+        .logo h1{
+            margin:auto 20px;
+            color:rgb(229, 223, 223);;
+        }
+        .logo img {
+            width: 50px;
+            height: 40px; 
+        }
+        
+        .nav-links {
+        display: flex;
+        }
+
+        .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        transition: transform 0.3s;
+        }
+
+        .nav-links a:hover {
+        transform: scale(1.1);
+        color:lightgrey;
+        }
+
+        .menu-icon {
+        display: none; /* Initially hidden on larger screens */
+        cursor: pointer;
+        }
+
+        .bar {
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        margin: 5px 0;
+        }
+
+        /* Media query for smaller screens */
+        @media only screen and (max-width: 768px) {
+        .navbar{
+            display:block;
+        }
+        .menu-icon {
+            display: block;
+            position:absolute;
+            right:20px;
+            top:13px;
+        }
+
+        .nav-links {
+            display: none; /* Initially hidden on smaller screens */
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            width: 100%;
+            background-color: #333;
+        }
+
+        .nav-links a {
+            padding: 10px 15px;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        .show-nav {
+            display: block; /* Show the navigation links */
+        }
+}
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        canvas {
+            margin: 20px 0;
+        }
+        #impactTypeChart {
+            max-width: 400px; /* Set a smaller max-width for the pie chart */
+            max-height: 400px;
+            margin: 0 auto; /* Center the smaller pie chart */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+          <img src="https://tse4.mm.bing.net/th?id=OIP.m98o3yW6eMNLtZE5A9-QtQHaHa&pid=Api&P=0&h=180">
+          <h1>Smart Flood & Rainfall Monitoring</h1>
+        </div>
+    
+        <div class="menu-icon" onclick="toggleNav()">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+    
+        <div class="nav-links" id ="nav-links">
+          <a href="index.html">Home</a>
+          <a href="Realtime records.html">Realtime Records</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="News and Updates.html">News and Updates</a>
+          <a href="faq.html">FAQ</a>
+          <a href="login.html">Login</a>
+        </div>
+      </nav>
+
+    <div class="container">
+        <h1>Impact of Chennai Floods 2023</h1>
+
+        <!-- Bar Chart for People Affected by Area -->
+        <h2>People Affected in Different Areas of Chennai</h2>
+        <canvas id="peopleAffectedChart"></canvas>
+
+        <!-- Pie Chart for Types of Impact (Injuries, Diseases, etc.) -->
+        <h2>How People Were Affected</h2>
+        <canvas id="impactTypeChart"></canvas>
+
+        <!-- Line Chart for Diseases Suffered Post-Flood -->
+        <h2>Common Diseases Suffered After Floods</h2>
+        <canvas id="diseasesChart"></canvas>
+    </div>
+
+    <script>
+        // Bar Chart: People Affected in Different Areas of Chennai
+        const peopleAffectedCtx = document.getElementById('peopleAffectedChart').getContext('2d');
+        const peopleAffectedChart = new Chart(peopleAffectedCtx, {
+            type: 'bar',
+            data: {
+                labels: ['T. Nagar', 'Velachery', 'Adyar', 'Tambaram', 'Guindy', 'Mylapore'],
+                datasets: [{
+                    label: 'Number of People Affected',
+                    data: [12000, 15000, 18000, 10000, 5000, 8000],
+                    backgroundColor: '#3498db'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Pie Chart: Types of Impact (Injuries, Diseases, etc.)
+        const impactTypeCtx = document.getElementById('impactTypeChart').getContext('2d');
+        const impactTypeChart = new Chart(impactTypeCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Injuries', 'Waterborne Diseases', 'Displacement', 'Property Loss', 'Deaths'],
+                datasets: [{
+                    label: 'Impact Types',
+                    data: [5000, 12000, 8000, 4000, 1000],
+                    backgroundColor: ['#e74c3c', '#3498db', '#2ecc71', '#f1c40f', '#8e44ad']
+                }]
+            }
+        });
+
+        // Line Chart: Diseases Suffered Post-Flood
+        const diseasesCtx = document.getElementById('diseasesChart').getContext('2d');
+        const diseasesChart = new Chart(diseasesCtx, {
+            type: 'line',
+            data: {
+                labels: ['November', 'December', 'January', 'February'],
+                datasets: [{
+                    label: 'Cholera Cases',
+                    data: [300, 500, 200, 100],
+                    borderColor: '#e74c3c',
+                    fill: false
+                }, {
+                    label: 'Dengue Cases',
+                    data: [200, 400, 300, 150],
+                    borderColor: '#3498db',
+                    fill: false
+                }, {
+                    label: 'Malaria Cases',
+                    data: [100, 150, 100, 50],
+                    borderColor: '#2ecc71',
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

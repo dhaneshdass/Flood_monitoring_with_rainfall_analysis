@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+<title>Flood Alertation</title>
+<style>
+* {
+  box-sizing: border-box;
+  }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  }
+.mySlides {
+  display: none;
+  }
+img {
+  vertical-align: middle;
+  }
+.mySlides img{
+  width:100%;
+  height:550px;
+}
+
+
+.slideshow-container {
+  max-width: 1300px;
+  position: relative;
+  margin:20px auto;
+  padding:15px;
+  background-color:#fff;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.1);
+  border-radius:10px;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+/* Button styles */
+.view-more {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px; 
+}
+.impact{
+  height: 100%;
+  width:80%;
+  margin:auto;
+  background-color:rgb(216, 250, 210);
+  border-radius: 30px;
+  margin-top:80px;
+}
+
+.impact-row {
+  display: flex;
+  margin: 30px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.impact-row img {
+  width: 20%;
+  margin:20px 50px;
+  height:150px;
+}
+
+.impact-content {
+  padding: 20px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.impact-content h2 {
+  margin-top: 0;
+  color: #007bff;
+}
+
+.impact-content p {
+  margin-bottom: 0;
+  color: #333;
+}
+/* Media query for smaller screens */
+@media only screen and (max-width: 768px) {
+  .images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .impact{
+    height: 100%;
+  }
+  .images div {
+    width: 45%;
+    margin: 10px;
+    text-align: center;
+  }
+
+  .images img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .images h2 {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  .mySlides img{
+  width:100%;
+  height:200px;
+}
+}
+
+</style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://tse4.mm.bing.net/th?id=OIP.m98o3yW6eMNLtZE5A9-QtQHaHa&pid=Api&P=0&h=180">
+      <h1>Smart Flood & Rainfall Monitoring</h1>
+    </div>
+
+    <div class="menu-icon" onclick="toggleNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <div class="nav-links" id ="nav-links">
+      <a href="index.html">Home</a>
+      <a href="Realtime records.html">Realtime Records</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="News and Updates.html">News and Updates</a>
+      <a href="faq.html">FAQ</a>
+      <a href="login.html">Login</a>
+    </div>
+  </nav>
+
+  <script >
+    function toggleNav() {
+      var navLinks = document.getElementById("nav-links");
+      navLinks.classList.toggle("show-nav");
+    }
+  </script>
+
+    <div class="slideshow-container">
+
+
+        <div class="mySlides fade">
+        <img src="https://static.theprint.in/wp-content/uploads/2022/09/Chennai-floods.jpg">
+        </div>
+
+        <div class="mySlides fade">
+        <img src="https://grist.org/wp-content/uploads/2021/04/GettyImages-1273051486-e1619714660946.jpg">
+        </div>
+
+        <div class="mySlides fade">
+        <img src="http://cdn.cnn.com/cnnnext/dam/assets/120811032408-philippines-flooding-7-horizontal-large-gallery.jpg" >
+        </div>
+
+    </div>
+<br>
+
+  <div style="text-align:center">
+    <span class="dot"></span> 
+    <span class="dot"></span> 
+    <span class="dot"></span> 
+  </div>
+
+
+    <div class="impact">
+      <h1 style="text-align:center;padding-top:25px;">IMPACT OF FLOODS</h1>
+      <div class="impact-row">
+        <img src="https://img.lemde.fr/2019/10/29/0/0/2430/1659/688/0/60/0/dcdc832_shLh771ED8YY7je1PHFSa7E4.jpg" alt="Human Life and Health">
+        <div class="impact-content">
+            <h2>Human Life and Health</h2>
+            <p>
+              Floods can be very dangerous and often cause deaths, either from drowning or accidents related to the flood. The water can also become dirty and spread diseases like cholera and typhoid, creating serious health problems. On top of that, people who survive floods often feel scared, stressed, and may struggle with mental health issues because of the loss of their homes, loved ones, or jobs.</p>
+        </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="impact-row">
+        <img src="http://mediaassets.fox13now.com/tribune-network/tribkstu-files-wordpress/2013/04/murray-flood-3.jpg" alt="Damage to Property">
+        <div class="impact-content">
+            <h2>Damage to Property</h2>
+            <p>
+              Floodwaters can cause serious damage to homes, buildings, roads, and bridges, which can be very expensive to fix. This leads to huge financial losses, as people may lose their property, businesses might have to shut down, and both individuals and governments have to spend a lot of money on repairs and rebuilding.</p>
+        </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="impact-row">
+        <img src="https://www.canr.msu.edu/flooding/uploads/photos/small-iStock-462049029.jpg" alt="Agriculture and Food Security">
+        <div class="impact-content">
+            <h2>Agriculture and Food Security</h2>
+            <p>Floods can ruin crops, drown animals, and wash away farmland, leading to food shortages and financial problems for farmers. The flooding also wears away the top layer of soil, which is important for growing plants, making the land less useful for farming in the future.</p>
+        </div>
+    </div>
+
+    <!-- Row 4 -->
+    <div class="impact-row">
+        <img src="https://static01.nyt.com/images/2019/03/22/climate/22CLI-FLOODEXPLAINER1/22CLI-FLOODEXPLAINER1-superJumbo.jpg?quality=90&auto=webp" alt="Environmental Impact">
+        <div class="impact-content">
+            <h2>Environmental Impact</h2>
+            <p>Floods can change ecosystems by forcing animals to leave their homes and damaging natural areas where they live. The floodwater often picks up trash, chemicals, and other harmful things, which can pollute rivers, lakes, and underground water sources.</p>
+        </div>
+    </div>
+    </div>
+
+
+<script>
+window.embeddedChatbotConfig = {
+chatbotId: "UqMSaBF5jeiXwD7tmesMd",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="UqMSaBF5jeiXwD7tmesMd"
+domain="www.chatbase.co"
+defer>
+</script>
+
+<div class="footer">
+    <div class="foo-content">
+    <img style="width:150px; height:150px; margin-top:25px; " src="https://tse4.mm.bing.net/th?id=OIP.m98o3yW6eMNLtZE5A9-QtQHaHa&pid=Api&P=0&h=180">
+    </div>
+    <div class="foo-content">
+      <p> <a href="blog.html">Blog </a></p>
+      <p> <a href="aboutus.html"> About Us</a></p>
+      <p> <a href="contact.html"> Contact</a> </p>
+      <p> <a href="faq.html">FAQS </a></p>
+      <p> <a href="terms.html">Terms & Condition</a></p>
+    </div>
+
+    <div class="foo-content">
+    <br>
+      <p> Ph no  :  9344944608</p>
+      <p> Email<br>teamaquaalert24@gmail.com</p>
+      <p> Address <br>23, Annanagar,Madurai. </p>
+    </div>
+
+    <div class="foo-content">
+      
+              <translate>
+        <div class ="gtrans" id="trans">
+          <div class="translate"> 
+        <h4>Translate</h4>
+                <div id="google_translate_element"> 
+                </div>
+        </div>
+        </div>
+        </translate>
+
+      <a style = "cursor:pointer">
+        <img style ="width:50px; height:50px; margin:20px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-7GrB8uBQOrF6ObnYZ15IOaSkxDQ9emHzXQDQPiIYAw-JL_9CCadt-QgFjkduWGxbaQo&usqp=CAU">
+      </a>
+      <a style = "cursor:pointer">
+        <img style ="width:50px; height:50px; margin:20px;" src="https://i.pinimg.com/474x/a2/4c/cc/a24ccc83bec854a87cc133fd52eb9161.jpg">
+      </a>
+      <a style = "cursor:pointer">
+        <img style ="width:50px; height:50px; margin:20px;" src="https://cdn3.iconfinder.com/data/icons/picons-social/57/43-twitter-512.png">
+      </a>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {pageLanguage: 'en'},
+            'google_translate_element'
+        );
+    }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+  <script src="script.js"></script>
+
+<script>
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 5000); // Change image every 5 seconds
+}
+</script>
+
+</body>
+</html>

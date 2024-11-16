@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Contact Us</title>
+    <style>
+        /* contact */
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: 0;
+  }
+body, ul,html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+    
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0c6493;
+    padding: 10px 20px;
+}
+
+.logo{
+    display: flex;
+}
+.logo h1{
+    margin:auto 20px;
+    color:rgb(229, 223, 223);
+}
+.logo img {
+    width: 50px;
+    height: 40px; 
+}
+  
+.nav-links {
+  display: flex;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: transform 0.3s;
+}
+
+.nav-links a:hover {
+  transform: scale(1.1);
+  color:lightgrey;
+}
+
+.menu-icon {
+  display: none; /* Initially hidden on larger screens */
+  cursor: pointer;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px 0;
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 768px) {
+  .navbar{
+    display:block;
+  }
+  .menu-icon {
+    display: block;
+    position:absolute;
+    right:20px;
+    top:13px;
+  }
+
+  .nav-links {
+    display: none; /* Initially hidden on smaller screens */
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    width: 100%;
+    background-color: #333;
+  }
+
+  .nav-links a {
+    padding: 10px 15px;
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  .show-nav {
+    display: block; /* Show the navigation links */
+  }
+}
+
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  
+  }
+  
+  .contact-form {
+    width: 60%; /* 60% width for the contact form */
+    padding: 20px;
+  }
+  
+  .image-container {
+    width: 40%; /* 40% width for the image container */
+    padding: 20px;
+    margin:auto;
+    text-align:center;
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    text-align: center;
+    margin:0px;
+    color: #333;
+  }
+  
+  form {
+    width: 100%;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  textarea,
+  select,
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .button-group {
+    text-align: center;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack elements in a column on smaller screens */
+    }
+  
+    .contact-form, .image-container {
+        width: 100%; /* Full width for both containers on smaller screens */
+        margin: 0; /* Remove margin */
+    }
+  
+    .contact-form {
+        padding: 10px;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+        font-size: 14px;
+    }
+  
+    button[type="submit"] {
+        font-size: 14px;
+    }
+  }
+  
+  /* Row-wise layout for checkboxes and radio buttons */
+  .input-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group input[type="checkbox"],
+  .input-group input[type="radio"] {
+    margin-right: 8px;
+    margin-left: 30px;
+  }
+  
+  /* Radio button group */
+  .radio-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .radio-group div {
+    margin-right: 20px;
+  }
+  
+  .radio-group input[type="radio"] {
+    margin-right: 8px;
+  }
+  
+  /* Image styles */
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+  }
+  @media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+  
+    .contact-form, .image-container {
+        width: 100%;
+        margin: 0;
+    }
+  
+    .contact-form {
+        padding: 10px;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+        font-size: 14px;
+        width:80%;
+    }
+  
+    button[type="submit"] {
+        font-size: 14px;
+    }
+  }
+  
+    </style>
+</head>
+<body>  
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://tse4.mm.bing.net/th?id=OIP.m98o3yW6eMNLtZE5A9-QtQHaHa&pid=Api&P=0&h=180">
+      <h1>Smart Flood & Rainfall Monitoring</h1>
+    </div>
+
+    <div class="menu-icon" onclick="toggleNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <div class="nav-links" id ="nav-links">
+      <a href="index.html">Home</a>
+      <a href="Realtime records.html">Realtime Records</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="News and Updates.html">News and Updates</a>
+      <a href="faq.html">FAQ</a>
+      <a href="login.html">Login</a>
+    </div>
+  </nav>
+<div class="container">
+    <div class="contact-form">
+        <h1>Contact Us</h1>
+        <form id="contactForm" action="/submit" method="post">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="reason">Reason for Contacting</label>
+                <select id="reason" name="reason">
+                    <option value="question">Question</option>
+                    <option value="feedback">Feedback</option>
+                    <option value="support">Support</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="contactMethod">Preferred Contact Method</label>
+                <div class="input-group">
+                    <input type="checkbox" id="contactEmail" name="contactMethod" value="email">
+                    <label for="contactEmail" style="margin-bottom:0px;">Email</label>
+                    <input type="checkbox" id="contactPhone" name="contactMethod" value="phone">
+                    <label for="contactPhone" style="margin-bottom:0px;">Phone</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="termsAgree">
+                    <input type="checkbox" id="termsAgree" name="termsAgree" required>
+                    I agree to the terms and conditions
+                </label>
+            </div>
+
+            <button type="submit" id="submitButton">Submit</button>
+        </form>
+    </div>
+
+    <div class="image-container">
+        <img src="https://gowtham-m-r.github.io/Peanut-Final/assets/img/email.gif" alt="Image">
+    </div>
+</div>
+
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault(); 
+        alert("Successfully sent"); // Show popup message
+    });
+</script>
+<script src="script.js"></script>
+</body>
+</html>

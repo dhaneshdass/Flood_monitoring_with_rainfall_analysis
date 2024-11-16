@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      justify-content: space-between;
+    }
+    body, ul,html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+        
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #0c6493;
+        padding: 10px 20px;
+    }
+
+    .logo{
+        display: flex;
+    }
+    .logo h1{
+        margin:auto 20px;
+        color:rgb(229, 223, 223);;
+    }
+    .logo img {
+        width: 50px;
+        height: 40px; 
+    }
+    
+    .nav-links {
+    display: flex;
+    }
+
+
+    .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: transform 0.3s;
+    }
+
+    .nav-links a:hover {
+    transform: scale(1.1);
+    color:lightgrey;
+    }
+
+    .menu-icon {
+    display: none; /* Initially hidden on larger screens */
+    cursor: pointer;
+    }
+
+    .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+    }
+
+    /* Media query for smaller screens */
+    @media only screen and (max-width: 768px) {
+    .navbar{
+        display:block;
+    }
+    .menu-icon {
+        display: block;
+        position:absolute;
+        right:20px;
+        top:13px;
+    }
+
+    .nav-links {
+        display: none; /* Initially hidden on smaller screens */
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+        width: 100%;
+        background-color: #333;
+    }
+
+    .nav-links a {
+        padding: 10px 15px;
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .show-nav {
+        display: block; /* Show the navigation links */
+    }
+    }
+
+    .faq-column {
+      max-width: 50%;
+      width: 100%;
+      margin: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .faq-heading {
+      background-color: #3498db;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 24px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e0e0e0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .faq-question,
+    .faq-answer {
+      padding: 20px;
+    }
+
+    .faq-question {
+      background-color: #3498db;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      position: relative;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question:hover {
+      background-color: #2980b9;
+    }
+
+    .faq-answer {
+      display: none;
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+      padding: 0 20px;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-toggle {
+      font-size: 24px;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px;
+      font-family: sans-serif;
+      font-size: 24px;
+    }
+
+    .main {
+      display: flex;
+    }
+
+    /* Media query for mobile view */
+    @media (max-width: 768px) {
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .main {
+        display: block;
+      }
+
+      .faq-column {
+        max-width: 100%;
+        margin: 10px 0;
+      }
+
+      .faq-item {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .faq-question {
+        font-size: 18px;
+        padding: 10px;
+      }
+
+      .faq-answer {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      .faq-toggle {
+        font-size: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin: 10px;
+      }
+
+      .faq-column {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+          <img src="https://tse4.mm.bing.net/th?id=OIP.m98o3yW6eMNLtZE5A9-QtQHaHa&pid=Api&P=0&h=180">
+          <h1>Smart Flood & Rainfall Monitoring</h1>
+        </div>
+    
+        <div class="menu-icon" onclick="toggleNav()">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+    
+        <div class="nav-links" id ="nav-links">
+          <a href="index.html">Home</a>
+          <a href="Realtime records.html">Realtime Records</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="News and Updates.html">News and Updates</a>
+          <a href="faq.html">FAQ</a>
+          <a href="login.html">Login</a>
+        </div>
+      </nav>
+
+<h1> FAQs</h1>
+
+    <div class="main">
+        <div class="faq-column">
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(1)">
+            <span class="faq-number">1</span>
+            What sensors are used in the Flood Monitoring System?
+            <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" id="answer1">Our system uses rain gauge sensors to measure rainfall intensity and ultrasonic water level sensors to monitor water levels. This combination provides a comprehensive analysis of flood risks.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(2)">
+            <span class="faq-number">2</span>
+            How does the system predict floods?
+            <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" id="answer2">The system collects real-time data from both sensors and uses machine learning algorithms to predict floods by analyzing historical and current environmental conditions.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(3)">
+            <span class="faq-number">3</span>
+            How does the alert system work?
+            <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" id="answer3">When rainfall intensity or water levels exceed predefined thresholds, the system automatically triggers alerts via SMS, email, or push notifications to warn users of potential floods.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(4)">
+            <span class="faq-number">4</span>
+            How is the data stored and accessed?
+            <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" id="answer4">All sensor data is stored in real-time in Firebase, which allows continuous monitoring and easy access from the web dashboard or mobile apps.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(5)">
+            <span class="faq-number">5</span>
+            Can this system be expanded to cover larger areas?
+            <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" id="answer5">Yes, the system is scalable and can integrate additional sensors to cover larger areas or different regions prone to flooding.</div>
+        </div>
+        </div>
+
+        <div class="faq-column">
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(6)">
+            <span class="faq-number">6</span>
+            How accurate is the flood prediction?
+            <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" id="answer6">The multi-sensor approach improves accuracy by combining rainfall and water level data. Additionally, machine learning enhances predictions by identifying patterns in the collected data.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(7)">
+            <span class="faq-number">7</span>
+            What happens if sensors fail or malfunction?
+            <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" id="answer7">Our system continuously monitors sensor health and can notify users of any malfunctions. Additionally, the data from other sensors will still provide valuable insights even if one sensor fails.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(8)">
+            <span class="faq-number">8</span>
+            Can the system work in remote areas?
+            <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" id="answer8">Yes, the system can be deployed in remote areas using low-power communication modules and solar-powered sensor nodes for continuous operation.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(9)">
+            <span class="faq-number">9</span>
+            How does the web application display the data?
+            <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" id="answer9">The web application provides real-time visualization of both rainfall and water levels. It also allows users to view historical trends and predictions, along with flood alerts.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(10)">
+            <span class="faq-number">10</span>
+            How can I receive flood alerts?
+            <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer" id="answer10">You can receive alerts via SMS, email, or mobile app push notifications when sensor data indicates a potential flood risk.</div>
+        </div>
+        </div>
+    </div>
+
+<script>
+  function toggleAnswer(questionNumber) {
+    var answerId = 'answer' + questionNumber;
+    var answerElement = document.getElementById(answerId);
+    var faqItem = answerElement.parentElement;
+
+    if (faqItem.classList.contains('active')) {
+      faqItem.classList.remove('active');
+      answerElement.style.display = 'none';
+    } else {
+      faqItem.classList.add('active');
+      answerElement.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>
