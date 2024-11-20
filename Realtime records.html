@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Monitoring</title>
+    <title>Real-Time Flood Monitoring</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -128,19 +128,19 @@
         <!-- Rainfall Intensity -->
         <div class="box">
             <h2>Rainfall Intensity</h2>
-            <p id="Rainfall">55 mm</p>
+            <p id="Rainfall">0 mm</p>
         </div>
 
         <!-- Alert Condition -->
         <div class="box">
             <h2>Alert Condition</h2>
-            <p id="Condition" class="alert">GOOD</p>
+            <p id="AlertCondition" class="alert">Loading...</p>
         </div>
 
         <!-- Water Level Distance -->
         <div class="box">
             <h2>Water Level Distance</h2>
-            <p id="WaterLevel">25 cm</p>
+            <p id="WaterLevel">0 cm</p>
         </div>
     </div>
 
@@ -165,16 +165,24 @@
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
-        // Reference to your data in Firebase
+        // References to fields in Firebase
         const rainfallRef = ref(database, 'sensor_data/rainfall_intensity');
+        const alertConditionRef = ref(database, 'sensor_data/alert_condition');
         const waterLevelRef = ref(database, 'sensor_data/water_level');
 
-        // Real-time data updates
+        // Real-time listener for Rainfall Intensity
         onValue(rainfallRef, (snapshot) => {
             const rainfall = snapshot.val();
             document.getElementById('Rainfall').innerText = rainfall + ' mm';
         });
 
+        // Real-time listener for Alert Condition
+        onValue(alertConditionRef, (snapshot) => {
+            const alertCondition = snapshot.val();
+            document.getElementById('AlertCondition').innerText = alertCondition;
+        });
+
+        // Real-time listener for Water Level
         onValue(waterLevelRef, (snapshot) => {
             const waterLevel = snapshot.val();
             document.getElementById('WaterLevel').innerText = waterLevel + ' cm';
