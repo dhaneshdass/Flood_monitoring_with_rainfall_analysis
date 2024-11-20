@@ -3,21 +3,21 @@ Welcome to the Smart Flood Monitoring with Real-Time Rainfall Analysis project! 
 
 🚀 Features
 Real-Time Monitoring:
-
 Measures rainfall intensity using a rain sensor.
 Tracks water level distance using an ultrasonic sensor.
-Flood Alerts:
 
+Flood Alerts:
 Provides alerts when water levels or rainfall intensity exceed predefined thresholds.
 Triggers a buzzer alarm during flood conditions for immediate attention.
-Cloud Integration:
 
+Cloud Integration:
 Real-time sensor data is stored in Firebase.
 Data is accessible globally via the hosted web interface.
-Web Visualization:
 
+Web Visualization:
 A dynamic website hosted on GitHub Pages displays sensor readings, flood alerts, and historical data.
 Includes graphs and visualizations of rainfall and water level trends.
+
 ⚙️ Technology Stack
 Hardware
 ESP32: For processing and IoT connectivity.
@@ -29,19 +29,19 @@ Software
 Firebase: Stores and retrieves real-time sensor data.
 HTML, CSS, JavaScript: For website design and interactivity.
 GitHub Pages: For hosting the project website.
+
 📊 How It Works
 Rainfall Detection:
-
 The rain sensor calculates the intensity of rainfall and sends the data to the ESP32.
+
 Water Level Monitoring:
-
 The ultrasonic sensor measures the distance to the ground or water surface and calculates the water level.
+
 Data Processing:
-
 ESP32 processes sensor readings and determines whether a flood condition exists based on predefined thresholds.
+
 Alerts:
-
 If flood conditions are detected, the system triggers a buzzer and updates Firebase with the alert condition.
-Web Display:
 
+Web Display:
 Real-time data (rainfall intensity, water level, and alerts) is fetched from Firebase and displayed on the website.
